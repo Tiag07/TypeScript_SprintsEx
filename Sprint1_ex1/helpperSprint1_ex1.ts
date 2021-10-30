@@ -1,29 +1,25 @@
-function showVowelsQuantity(word : string = '')
-{
-    let vowelsQuantity : number = 0 //Guardará o número de vogais da palavra digitada
+function showVowelsQuantity(originalWord : string = '')
+{   
+    let thisFunctionHasCalledViaConsole : boolean = originalWord != ''; //Checa se a função foi chamada pelo console com parâmetros enviados
+    if(!thisFunctionHasCalledViaConsole) //Se não foi chamada pelo console, a função vai pegar o texto do formulário Html
+        originalWord = document.getElementById('inputWord').value;       
     
-    var functionHasCalledViaHtml : boolean = word =='' //Checa se a função está sendo chamada via html
-    if(functionHasCalledViaHtml) //Se não houver palavra enviada, a função vai pegar o texto do formulário
-        word = document.getElementById('inputWord').value        
-     
-    let formattedWord : string = word //formattedWord é a string que será usada na checagem de vogais
-    .toUpperCase() //Transforma as letras da palavra em maiúsculas para facilitar a checagem
-    .trim() //Remove os espaços da palavra
-    .normalize("NFD") //Remove os acentos e caracteres especiais
+    //A palavra recebida se torna Maiúscula, tem os caracteres especiais e espaços removidos. Ela também é atribuida à formattedWord 
+    let formattedWord : string = originalWord.toUpperCase().trim().normalize("NFD"); 
 
-    let wordChars: Array<string> = formattedWord.split('') //Converte a palavra em um array de letras
-    let standardVowels : string[] = ['A','E','I','O','U'] //Define o que é uma vogal
+    let vowelsQuantity : number = formattedWord.match(/[AEIOU]/g)?.length; //vowelsQuantity recebe a quantidade de caracteres "AEIOU" da palavra digitada
+    if(vowelsQuantity == null) vowelsQuantity = 0; //Evita que o texto apareça como "undefined" quando não há vogais
     
-    for(let wc=0; wc < wordChars.length; wc++) //Passa por cada letra da palavra (wc = WordChars)
-        for(let sv=0; sv < wordChars.length; sv++) //Passa pelas vogais (sv = StandardVowels)
-    if(wordChars[wc] == standardVowels[sv]) vowelsQuantity++ //Checa se a letra da palavra é igual a uma vogal
-
-    if(functionHasCalledViaHtml){ //Aqui o texto do site exibe quantas vogais a palavra tem
+    if(!thisFunctionHasCalledViaConsole)//Aqui o texto do site exibe quantas vogais a palavra tem
+    { 
         let txtResults = document.querySelector("p#finalResults")
-        txtResults?.innerHTML = `O texto "${word}" contém ${vowelsQuantity} vogais!`
-    }
+        
+        //Caso o input de texto esteja vazío, o site solicita que o usuário digite algo
+        if(formattedWord == '' ) txtResults?.innerHTML = 'Digite algo na caixa de texto' 
+        else txtResults?.innerHTML = `O texto "${originalWord}" contém ${vowelsQuantity} vogais!`
+    } 
 
-    console.log(`O texto "${word}" contém ${vowelsQuantity} vogais!`) //Também mostra no console 
+    console.log(`O texto "${originalWord}" contém ${vowelsQuantity} vogais!`) //Também mostra no console 
 }
 //Exemplos sendo chamados pelo console
 showVowelsQuantity('Abacaxi');
