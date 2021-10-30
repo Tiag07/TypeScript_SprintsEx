@@ -1,4 +1,4 @@
-let userList : Array<Object> = 
+let peopleList : Array<Object> = 
 [
     {id : 1, name: "Ada Lovelace", bio : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
     {id : 2, name: "Alan Turing", bio : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
@@ -7,7 +7,7 @@ let userList : Array<Object> =
 ];
 
 function tabela_Start() {
-    
+    refreshTable();
 }
 
 function formulario_Start() {
@@ -18,11 +18,27 @@ function openForm(){
 window.open('sprint1_ex4_formulario.html');
 }
 
-function btnAddItemOnTable(){
-    let inputNewName : string = document.querySelector('input#inputNewName').value;
-    let inputNewBio : string = document.querySelector('input#inputNewBio').value;
+function deleteItem(){
+let idForDeleting : number = Number(window.prompt('Qual o Id do item que você quer deletar?'));
 }
 
-function refreshItemsId(){
+function btnAddItemOnTable(){
+    
+    let inputNewName : string = document.querySelector('input#inputNewName').value;
+    let inputNewBio : string = document.querySelector('input#inputNewBio').value;
+
+}
+
+function refreshTable(){
+const table = document.getElementById('mainTable');
+let dataRowHtml = document.getElementById('tableNewRows');
+for(let person of peopleList)
+{
+    //dataRowHtml?.innerHTML += 'ss'
+    var newDataRow = document.createElement('tr');
+    newDataRow.id = 'mainTable';
+    newDataRow.innerHTML = '<td> 1</td><td> asds</td> <td> nasdsa</td>'
+    table?.appendChild(newDataRow);
+}
 
 }

@@ -10,18 +10,15 @@
 </head>
 <body onload="tabela_Start()">
     <h1>Tabela de dados</h1>
-    <input type="button" value="Adicionar novo item na lista" id = "btnAbrirFormulario" onclick="openForm()">
-    <table id = "Table">
+    <input type="button" value="Adicionar novo item" id = "btnAbrirFormulario" onclick="openForm()">
+    <input type="button" value="Deletar item da Lista" id = "btnDeletarItem" onclick="deleteItem()">
+    <table id = "mainTable">
         <tr>
             <td>Id</td>
             <td>Nome</td>
             <td>Bio</td>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>Alan</td>
-            <td>Descrição do Alaasdasdassssssssssssssssddddddddddddddddddddddn</td>
-        </tr>
+         <tr id = 'tableNewRows'></tr>
     </table>
 </body>
 </html>

@@ -2,7 +2,7 @@ body{
     font:normal 20pt Arial;
     text-align: center;
 }
-table#Table{
+table#mainTable{
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -11,12 +11,18 @@ table#Table{
     border-spacing: 0;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.466);
 }
-input#btnAdicionarNaTabela, input#btnAbrirFormulario{
+input#btnAdicionarNaTabela, input#btnAbrirFormulario, input#btnDeletarItem{
     margin-top: 10px;
-    height: 30px;
+    height: 40px;
     width: 250px;
-    font:normal 11pt Arial;
+    font:normal 15pt Arial;
     text-align: center;
+}
+input#btnDeletarItem{
+    background: rgb(255, 118, 118);
+}
+input#btnAbrirFormulario{
+    background: rgb(116, 255, 139);
 }
 th,td{
     padding: 30px 20px;
