@@ -1,0 +1,24 @@
+body{
+    font:normal 20pt Arial;
+    text-align: center;
+}
+table#Table{
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(247, 209, 86);
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.466);
+}
+input#btnAdicionarNaTabela, input#btnAbrirFormulario{
+    margin-top: 10px;
+    height: 30px;
+    width: 250px;
+    font:normal 11pt Arial;
+    text-align: center;
+}
+th,td{
+    padding: 30px 20px;
+    border: 2px solid 
+}
