@@ -1,17 +1,18 @@
 body{
     font:normal 18pt Arial;
     text-align: center;
+    background-color: rgb(130, 204, 238);
 }
 table#mainTable{
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(247, 209, 86);
+    background-color: rgb(220, 232, 240);
     border-collapse: collapse;
     border-spacing: 0;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.466);
 }
-input#btnAdicionarNaTabela, input#btnAbrirFormulario, input#btnDeletarItem{
+input#btnAdicionarNaTabela, input#btnAbrirFormulario, input#btnDeletarItem, input#btnRestaurarTabela{
     margin-top: 10px;
     height: 40px;
     width: 250px;
@@ -23,6 +24,9 @@ input#btnDeletarItem{
 }
 input#btnAbrirFormulario{
     background: rgb(116, 255, 139);
+}
+input#btnRestaurarTabela{
+    background: rgb(253, 255, 116);
 }
 input#inputNewBio{
     width: 400px;

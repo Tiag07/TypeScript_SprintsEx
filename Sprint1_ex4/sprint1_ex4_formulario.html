@@ -18,19 +18,18 @@
     <input type="button" value="Adicionar na tabela" id = "btnAdicionarNaTabela" onclick=closeFormWindow()>
 
     <script>
-        function closeFormWindow(){
+        function closeFormWindow(){ //Fecha a janela do formulário e recarrega a janela da tabela
             
-            let peopleRegistredCount = localStorage.length/2;//Cada pessoa tem 2 propriedades, bio e name, então divido para ter a quantidade de pessoas
-            let newName = document.getElementById("inputNewName").value;
+            let peopleRegistredCount = localStorage.length/2;//Pega o id do último elemento salvo no localStorage, a divisão por 2 acontece devido cada objeto possuir 2 propriedades (name e bio).
+            
+            let newName = document.getElementById("inputNewName").value;//Pega os valores do formulário
             let newBio = document.getElementById("inputNewBio").value;
-             
-            localStorage.setItem("name" + Number(peopleRegistredCount),newName);
+
+            localStorage.setItem("name" + Number(peopleRegistredCount),newName);//Registra os valores digitados no slot seguinte ao slot do último dado armazenado
             localStorage.setItem("bio" + Number(peopleRegistredCount), newBio);
         
-           window.opener.location.href = "sprint1_ex4_tabela.html";
-           window.self.close();
-           
-            
+           window.opener.location.href = "sprint1_ex4_tabela.html";//Recarrega a janela da tabela
+           window.self.close(); //Fecha a janela da tabela
         }
     
     </script>
