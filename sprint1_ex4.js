@@ -12,6 +12,7 @@ function onEnable_Table() {
 }
 function loadTableData() {
     if (localStorage.getItem("name0") == null) {
+        overwriteTableData();
         refreshTable();
         return;
     }
@@ -19,32 +20,30 @@ function loadTableData() {
     for (var i = 0; i < localStorage.length / 2; i++) {
         btnAddItemOnTable(localStorage.getItem('name' + i), localStorage.getItem('bio' + i));
     }
+    refreshTable();
 }
 function overwriteTableData() {
-    localStorage.clear();
     for (var i = 0; i < peopleList.length; i++) {
         localStorage.setItem("name" + i, peopleList[i].name);
         localStorage.setItem("bio" + i, peopleList[i].bio);
-        //changeTxtName("<br>Name: " + localStorage.getItem('name' + peopleCount) + "<br>Bio: " + localStorage.getItem('bio' + peopleCount));
     }
 }
 function openForm() {
-    btnAddItemOnTable('a', 'bio');
-    //window.open('sprint1_ex4_formulario.html', 'rating', 'left =200, height=400, width=900');
+    //btnAddItemOnTable('a', 'bio');
+    window.open('sprint1_ex4_formulario.html', 'rating', 'left =200, height=400, width=900');
 }
 function btnAddItemOnTable(newName, newBio) {
     if (newName === void 0) { newName = ''; }
     if (newBio === void 0) { newBio = ''; }
-    if (newName === '')
-        newName = document.getElementById("inputNewName");
-    if (newBio === '')
-        newBio = document.getElementById("inputNewBio");
+    //if(newName === '') newName = document.getElementById("inputNewName").value;  
+    //if(newBio === '') newBio = document.getElementById("inputNewBio").value;
+    //alert(newName + newBio);
     var newPerson = {};
     newPerson.id = 0;
     newPerson.name = newName;
     newPerson.bio = newBio;
     peopleList.push(newPerson);
-    refreshTable();
+    overwriteTableData();
 }
 function changeTxtName(txt) {
     var a = document.getElementById('txtTabela');
@@ -54,9 +53,9 @@ function deleteItem() {
     var idForDeleting = Number(window.prompt('Qual o Id do item que você quer deletar?'));
     if (ValidateId(idForDeleting)) {
         peopleList.splice(idForDeleting - 1, 1);
-        //overwriteTableData();
+        localStorage.clear();
+        overwriteTableData();
         refreshTable();
-        //loadTableData();
     }
     else
         alert('Insira um id válido!');
