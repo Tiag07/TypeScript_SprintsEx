@@ -1,5 +1,5 @@
 body{
-    font:normal 20pt Arial;
+    font:normal 18pt Arial;
     text-align: center;
 }
 table#mainTable{
@@ -23,6 +23,9 @@ input#btnDeletarItem{
 }
 input#btnAbrirFormulario{
     background: rgb(116, 255, 139);
+}
+input#inputNewBio{
+    width: 400px;
 }
 th,td{
     padding: 30px 20px;

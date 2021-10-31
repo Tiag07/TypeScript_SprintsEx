@@ -5,39 +5,63 @@ let peopleList : Array<Object> =
     {id : 3, name: "Nikola Tesla", bio : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
     {id : 4, name: "Nicolau Copérnico", bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
 ];
+let tableWindow;
+let formWindow;
 
-function tabela_Start() {
+function onEnable_Table() {
+    tableWindow = window;
     refreshTable();
 }
-
-function formulario_Start() {
+function onEnableForm() {
     
 }
 
 function openForm(){
-window.open('sprint1_ex4_formulario.html');
+formWindow = window.open('sprint1_ex4_formulario.html', '_blank', 'left =200, height=400, width=900, toolbar=no');
 }
 
-function deleteItem(){
-let idForDeleting : number = Number(window.prompt('Qual o Id do item que você quer deletar?'));
-}
-
-function btnAddItemOnTable(){
+function btnAddItemOnTable()
+{
+    let newPerson : object = {};
+    newPerson.id = 0;
+    newPerson.name = newName;
+    newPerson.bio = newBio;
+    peopleList.push(newPerson);
+    }
     
-    let inputNewName : string = document.querySelector('input#inputNewName').value;
-    let inputNewBio : string = document.querySelector('input#inputNewBio').value;
-
-}
+    function changeTxtName()
+    {
+        let a = document.getElementById('txtTabela');
+        a?.innerHTML = 'aaaaaaa';
+    }
+ 
+function deleteItem(){
+    let idForDeleting : number = Number(window.prompt('Qual o Id do item que você quer deletar?'));
+    if(ValidateId(idForDeleting))
+    {
+        peopleList.splice(idForDeleting - 1, 1);
+        refreshTable();
+    }
+    else alert('Insira um id válido!');   
+    }
+    
+function ValidateId(id : any){
+        if(id > peopleList.length || id == 0) 
+        return false;
+        
+        else return true;
+    }
 
 function refreshTable(){
 const table = document.getElementById('mainTable');
-let dataRowHtml = document.getElementById('tableNewRows');
-for(let person of peopleList)
+table?.innerHTML = '';
+let personId = 1;
+for(let person : object of peopleList)
 {
-    //dataRowHtml?.innerHTML += 'ss'
-    var newDataRow = document.createElement('tr');
+    person.id = personId++;
+    let newDataRow = document.createElement('tr');
     newDataRow.id = 'mainTable';
-    newDataRow.innerHTML = '<td> 1</td><td> asds</td> <td> nasdsa</td>'
+    newDataRow.innerHTML = `<td> ${person.id}</td><td> ${person.name}</td> <td>${person.bio}</td>`;
     table?.appendChild(newDataRow);
 }
 
