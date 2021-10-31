@@ -5,28 +5,25 @@ let peopleList : Array<Object> =
     {id : 3, name: "Nikola Tesla", bio : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
     {id : 4, name: "Nicolau Copérnico", bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
 ];
-let tableWindow;
-let formWindow;
 
 function onEnable_Table() {
-    tableWindow = window;
+
     refreshTable();
-}
-function onEnableForm() {
-    
 }
 
 function openForm(){
-formWindow = window.open('sprint1_ex4_formulario.html', '_blank', 'left =200, height=400, width=900, toolbar=no');
+ window.open('sprint1_ex4_formulario.html', '_blank', 'left =200, height=400, width=900, toolbar=no');
 }
 
 function btnAddItemOnTable()
-{
+{  
+    changeTxtName();
     let newPerson : object = {};
     newPerson.id = 0;
     newPerson.name = newName;
     newPerson.bio = newBio;
     peopleList.push(newPerson);
+    formWindow.close();
     }
     
     function changeTxtName()
@@ -34,6 +31,7 @@ function btnAddItemOnTable()
         let a = document.getElementById('txtTabela');
         a?.innerHTML = 'aaaaaaa';
     }
+    
  
 function deleteItem(){
     let idForDeleting : number = Number(window.prompt('Qual o Id do item que você quer deletar?'));
@@ -46,7 +44,7 @@ function deleteItem(){
     }
     
 function ValidateId(id : any){
-        if(id > peopleList.length || id == 0) 
+        if(id > peopleList.length || id === 0) 
         return false;
         
         else return true;

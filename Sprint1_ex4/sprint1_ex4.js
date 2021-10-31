@@ -5,23 +5,20 @@ var peopleList = [
     { id: 3, name: "Nikola Tesla", bio: "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada." },
     { id: 4, name: "Nicolau Copérnico", bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." }
 ];
-var tableWindow;
-var formWindow;
 function onEnable_Table() {
-    tableWindow = window;
     refreshTable();
 }
-function onEnableForm() {
-}
 function openForm() {
-    formWindow = window.open('sprint1_ex4_formulario.html', '_blank', 'left =200, height=400, width=900, toolbar=no');
+    window.open('sprint1_ex4_formulario.html', '_blank', 'left =200, height=400, width=900, toolbar=no');
 }
 function btnAddItemOnTable() {
+    changeTxtName();
     var newPerson = {};
     newPerson.id = 0;
     newPerson.name = newName;
     newPerson.bio = newBio;
     peopleList.push(newPerson);
+    formWindow.close();
 }
 function changeTxtName() {
     var a = document.getElementById('txtTabela');
@@ -37,7 +34,7 @@ function deleteItem() {
         alert('Insira um id válido!');
 }
 function ValidateId(id) {
-    if (id > peopleList.length || id == 0)
+    if (id > peopleList.length || id === 0)
         return false;
     else
         return true;
