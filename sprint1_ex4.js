@@ -8,30 +8,20 @@ var peopleList = [
 var txtSaved = '';
 function onEnable_Table() {
     //localStorage.clear();
-    refreshTable();
-    //loadTableData();
+    loadTableData();
 }
 function loadTableData() {
-    /*  if(localStorage.getItem("name1") == null) {
-       refreshTable();
-          return;
-      }*/
-    for (var i = 0; i < peopleList.length - 1; i++) {
-        alert(localStorage.getItem('name' + i));
+    if (localStorage.getItem("name0") == null) {
+        refreshTable();
+        return;
     }
-    /*
-    for(let person : object of peopleList)
-    {
-      let id : number  = 1;
-      
-    let person.name : string = localStorage.getItem('name' + id);
-    let person.bio : string = localStorage.getItem('bio'+ id);
-    alert(person.name + person.bio)
-    btnAddItemOnTable(person.name, person.bio);
-    */
-    refreshTable();
+    peopleList = [];
+    for (var i = 0; i < localStorage.length / 2; i++) {
+        btnAddItemOnTable(localStorage.getItem('name' + i), localStorage.getItem('bio' + i));
+    }
 }
 function overwriteTableData() {
+    localStorage.clear();
     for (var i = 0; i < peopleList.length; i++) {
         localStorage.setItem("name" + i, peopleList[i].name);
         localStorage.setItem("bio" + i, peopleList[i].bio);
@@ -39,7 +29,8 @@ function overwriteTableData() {
     }
 }
 function openForm() {
-    window.open('sprint1_ex4_formulario.html', 'rating', 'left =200, height=400, width=900');
+    btnAddItemOnTable('a', 'bio');
+    //window.open('sprint1_ex4_formulario.html', 'rating', 'left =200, height=400, width=900');
 }
 function btnAddItemOnTable(newName, newBio) {
     if (newName === void 0) { newName = ''; }
