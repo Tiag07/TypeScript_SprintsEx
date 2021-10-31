@@ -5,30 +5,67 @@ var peopleList = [
     { id: 3, name: "Nikola Tesla", bio: "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada." },
     { id: 4, name: "Nicolau Copérnico", bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." }
 ];
+var txtSaved = '';
 function onEnable_Table() {
+    //localStorage.clear();
+    refreshTable();
+    //loadTableData();
+}
+function loadTableData() {
+    /*  if(localStorage.getItem("name1") == null) {
+       refreshTable();
+          return;
+      }*/
+    for (var i = 0; i < peopleList.length - 1; i++) {
+        alert(localStorage.getItem('name' + i));
+    }
+    /*
+    for(let person : object of peopleList)
+    {
+      let id : number  = 1;
+      
+    let person.name : string = localStorage.getItem('name' + id);
+    let person.bio : string = localStorage.getItem('bio'+ id);
+    alert(person.name + person.bio)
+    btnAddItemOnTable(person.name, person.bio);
+    */
     refreshTable();
 }
-function openForm() {
-    window.open('sprint1_ex4_formulario.html', '_blank', 'left =200, height=400, width=900, toolbar=no');
+function overwriteTableData() {
+    for (var i = 0; i < peopleList.length; i++) {
+        localStorage.setItem("name" + i, peopleList[i].name);
+        localStorage.setItem("bio" + i, peopleList[i].bio);
+        //changeTxtName("<br>Name: " + localStorage.getItem('name' + peopleCount) + "<br>Bio: " + localStorage.getItem('bio' + peopleCount));
+    }
 }
-function btnAddItemOnTable() {
-    changeTxtName();
+function openForm() {
+    window.open('sprint1_ex4_formulario.html', 'rating', 'left =200, height=400, width=900');
+}
+function btnAddItemOnTable(newName, newBio) {
+    if (newName === void 0) { newName = ''; }
+    if (newBio === void 0) { newBio = ''; }
+    if (newName === '')
+        newName = document.getElementById("inputNewName");
+    if (newBio === '')
+        newBio = document.getElementById("inputNewBio");
     var newPerson = {};
     newPerson.id = 0;
     newPerson.name = newName;
     newPerson.bio = newBio;
     peopleList.push(newPerson);
-    formWindow.close();
+    refreshTable();
 }
-function changeTxtName() {
+function changeTxtName(txt) {
     var a = document.getElementById('txtTabela');
-    a === null || a === void 0 ? void 0 : a.innerHTML = 'aaaaaaa';
+    a === null || a === void 0 ? void 0 : a.innerHTML += txt;
 }
 function deleteItem() {
     var idForDeleting = Number(window.prompt('Qual o Id do item que você quer deletar?'));
     if (ValidateId(idForDeleting)) {
         peopleList.splice(idForDeleting - 1, 1);
+        //overwriteTableData();
         refreshTable();
+        //loadTableData();
     }
     else
         alert('Insira um id válido!');

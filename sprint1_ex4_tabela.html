@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="sprint1_ex4.css">
     <script src="sprint1_ex4.js"></script>
+
     <title>Tabela</title>
 </head>
 <body onload="onEnable_Table()">
     <h1>Tabela de dados</h1>
-    <div id="txtTabela">asdasdas</div>
-    <input type="button" value="Adicionar novo item" id = "btnAbrirFormulario" onclick="openForm()">
-    <input type="button" value="Deletar item da Lista" id = "btnDeletarItem" onclick="deleteItem()">
+    <div id="txtTabela"></div>
+    <input type="button" value="Adicionar novo item" id = "btnAbrirFormulario" onclick=openForm()>
+    <input type="button" value="Deletar item da Lista" id = "btnDeletarItem" onclick=deleteItem()>
+    <input type="button" value="Salvar" id = "btnSave" onclick=overwriteTableData()>
+    <input type="button" value="Carregar" id = "btnLoad" onclick=loadTableData()>
     <table id = "mainTable">
         <tr>
             <td>Id</td>
