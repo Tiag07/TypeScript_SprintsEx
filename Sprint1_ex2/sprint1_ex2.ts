@@ -1,4 +1,10 @@
-let list : Array<Object> = 
+type personData = {
+  id : number;
+  name : string;
+  bio : string;
+}
+
+let list : Array<personData> = 
 [
     {id : 1, name: "Ada Lovelace", bio : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
     {id : 2, name: "Alan Turing", bio : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
@@ -8,24 +14,36 @@ let list : Array<Object> =
 
 function showBio(bioId : number)
 {
-  bioId -=1;
-  return list[bioId].bio;
+  for(let person : personData of list)
+  {
+    if(person.id === bioId)
+    {
+      return person.bio;
+    } 
+  }
+  console.log("Insira um número que represente um dos id da lista!");
 }
 
 function showName(nameId : number)
 {
-  nameId -=1;
-  return list[nameId].name;
+  for(let person : personData of list)
+  {
+    if(person.id === nameId)
+    {
+      return person.name;
+    } 
+  }
+  console.log("Insira um número que represente um dos id da lista!");
 }
 
 function deleteItem_Imperativo(itemId : number) //Essa deleta elementos da list original
 {
-  for(let obj : object of list)
+  for(let person : personData of list)
   {
-    if(obj.id == itemId)
+    if(person.id === itemId)
     {
-      list.splice(list.indexOf(obj),1);
-      console.log(`${obj.name} saiu da lista com sucesso!`);
+      list.splice(list.indexOf(person),1);
+      console.log(`${person.name} saiu da lista com sucesso!`);
       return;
     } 
   }
@@ -33,16 +51,16 @@ function deleteItem_Imperativo(itemId : number) //Essa deleta elementos da list 
   
 }
 
-function deleteItem_Funcional(listRecived : Array<Object>, itemId : number) //Essa recebe a list original como parâmetro e retorna uma nova com modificações. A original não sofre mudanças
+function deleteItem_Funcional(listRecived : Array<personData>, itemId : number) //Essa recebe a list original como parâmetro e retorna uma nova com modificações. A original não sofre mudanças
 {
-  let newList : Array<Object> = Object.assign([], listRecived);
+  let newList : Array<personData> = Object.assign([], listRecived);
 
-  for(let obj : object of newList)
+  for(let person : personData of newList)
   {
-    if(obj.id == itemId)
+    if(person.id === itemId)
     {
-      newList.splice(list.indexOf(obj),1);
-      console.log(`${obj.name} saiu da lista com sucesso!`);
+      newList.splice(list.indexOf(person),1);
+      console.log(`${person.name} saiu da lista com sucesso!`);
       return newList;
     } 
   }
@@ -50,71 +68,69 @@ function deleteItem_Funcional(listRecived : Array<Object>, itemId : number) //Es
 }
 
 //No imperativo, a list original é alterada
-function changeNameOrBio_Imperativo(itemId : number, nameOrBio : string, newValue : string)
-{
-    itemId -=1;
-    switch(nameOrBio)//O switch identifica se o usuário desejou mudar o nome ou a bio, newValue é o novo nome/bio digitados
+function changeNameOrBio_Imperativo(itemId : number, newName? : string, newBio? : string)
+{ 
+  for(let person : personData of list)
+  {
+    if(person.id === itemId)
     {
-    case 'name':
-    list[itemId].name = newValue;
-    break;
+     if(newName) person.name = newName;
+     if(newBio) person.bio = newBio;
 
-    case 'bio':
-    list[itemId].bio = newValue;
-    break;
-
-    default : return;
-    }
-    //Mostra somente quais dados foram atualizados
-    console.log(`Atualização do item de id = ${itemId}:
-    name: ${list[itemId].name}
-    bio:  ${list[itemId].bio}`);
+     console.log(`Dados do id ${person.id} Atualizados com sucesso!`);  
+     return;
+    } 
+  } 
+  console.log("Insira um número que represente um dos id da lista!");  
 }
 
 //No funcional, a list original é recebida como parâmetro e retorna uma nova lista após fazer as alterações. A original não sofre mudanças
-function changeNameOrBio_Funcional(listRecived : Array<Object>, itemId : number, nameOrBio : string, newValue : string)
+function changeNameOrBio_Funcional(listRecived : Array<personData>, itemId : number, newName? : string, newBio? : string)
 {
     let newList = [];
     listRecived.forEach(objects => newList.push(Object.assign({}, objects)));
-    itemId -=1;
-    switch(nameOrBio)
+    
+    for(let person : personData of newList)
+  {
+    if(person.id === itemId)
     {
-    case 'name':
-    newList[itemId].name = newValue;
-    break;
+     if(newName) person.name = newName;
+     if(newBio) person.bio = newBio;
 
-    case 'bio':
-    newList[itemId].bio = newValue;
-    break;
-
-    default : return
-    }
-    console.log(`Atualização do item de id = ${itemId}:
-    Nome Atual: ${newList[itemId].name}
-    Bio Atual:  ${newList[itemId].bio}`);
-    return newList;
+     console.log(`Dados do id ${person.id} Atualizados com sucesso!`);  
+     return newList;
+    } 
+  } 
+  console.log("Insira um número que represente um dos id da lista!");  
 }
 
 //Chamando as funções para exibir nome e bio
-//console.log(showBio(1));
-//console.log(showName(1));
+console.log("EXIBIR NOME DO id 1: " + showName(1));
+console.log("EXIBIR BIO DO id 1: " + showBio(1));
 
 //Exemplos usando a programação funcional, a list original se mantém a mesma, abaixo criamos outras duas para exibir as novas modificações
-//let listWithModifiedName : Array<Object> = changeNameOrBio_Funcional(list, 1, 'name', 'Bob Esponja');
-//console.log(listWithModifiedName);//Mostra a lista completa com o novo nome incluso
+console.log("---PARADIGMA FUNCIONAL---");
+console.log("NOVA LISTA COM id 4 DELETADO: ");
+let listWithDeletedItem : Array<personData> = deleteItem_Funcional(list, 4);
+console.log(listWithDeletedItem);//Mostra a nova lista com o elemento 4 deletado
 
-//let listWithModifiedBio : Array<Object> = changeNameOrBio_Funcional(list, 1, 'bio', 'É um cara que mora em um abacaxi');
-//console.log(listWithModifiedBio);//Mostra a lista completa com a nova bio inclusa
+console.log("NOVA LISTA COM id 2 TENDO APENAS O NOME ALTERADO: ");
+console.log(changeNameOrBio_Funcional(list,2, 'Garfield', ''));
+console.log("NOVA LISTA COM id 2 TENDO APENAS A BIO ALTERADA: ");
+console.log(changeNameOrBio_Funcional(list,2, '', 'Um gato que gosta muito de dormir.'));
+console.log("NOVA LISTA COM id 2 TENDO O NOME E A BIO ALTERADOS: ");
+console.log(changeNameOrBio_Funcional(list,2, 'Garfield', 'Um gato que gosta muito de dormir.'));
 
-let listWithDeletedItem : Array<Object> = deleteItem_Funcional(list, 4);
-console.log(listWithDeletedItem);//Mostra a lista com o elemento 2 deletado
+console.log("LISTA ORIGINAL INTACTA DEVIDO AO PARADIGMA FUNCIONAL: ");
+console.log(list);
 
 
 //Exemplos usando paradigma imperativo
-//deleteItem_Imperativo(1);
-//changeNameOrBio_Imperativo(2, 'name', 'Chaves')
-//changeNameOrBio_Imperativo(2, 'bio', 'Mora em um barril.')
+console.log("---PARADIGMA IMPERATIVO---");
+deleteItem_Imperativo(1);
+changeNameOrBio_Imperativo(1, 'Pateta', 'Personagem da Disney.'); //Mostra a mensagem de que o id 1 não está mais na lista, então não é possível modificá-lo.
+changeNameOrBio_Imperativo(2, 'Pikachu', 'Pokémon do tipo elétrico.');
 
-console.log("LISTA ORIGINAL: ");
+console.log("LISTA ORIGINAL MODIFICADA PELO PARADIGMA IMPERATIVO: ");
 console.log(list);
 
