@@ -20,16 +20,33 @@ function showName(nameId : number)
 
 function deleteItem_Imperativo(itemId : number) //Essa deleta elementos da list original
 {
-  itemId -=1;
-  list.splice(itemId,1);
+  for(let obj : object of list)
+  {
+    if(obj.id == itemId)
+    {
+      list.splice(list.indexOf(obj),1);
+      console.log(`${obj.name} saiu da lista com sucesso!`);
+      return;
+    } 
+  }
+  console.log("Insira um número que represente um dos id da lista!");
+  
 }
 
 function deleteItem_Funcional(listRecived : Array<Object>, itemId : number) //Essa recebe a list original como parâmetro e retorna uma nova com modificações. A original não sofre mudanças
 {
   let newList : Array<Object> = Object.assign([], listRecived);
-  itemId -=1;
-  newList.splice(itemId,1);
-  return newList;
+
+  for(let obj : object of newList)
+  {
+    if(obj.id == itemId)
+    {
+      newList.splice(list.indexOf(obj),1);
+      console.log(`${obj.name} saiu da lista com sucesso!`);
+      return newList;
+    } 
+  }
+  console.log("Insira um número que represente um dos id da lista!");
 }
 
 //No imperativo, a list original é alterada
@@ -79,22 +96,22 @@ function changeNameOrBio_Funcional(listRecived : Array<Object>, itemId : number,
 }
 
 //Chamando as funções para exibir nome e bio
-console.log(showBio(1));
-console.log(showName(1));
+//console.log(showBio(1));
+//console.log(showName(1));
 
 //Exemplos usando a programação funcional, a list original se mantém a mesma, abaixo criamos outras duas para exibir as novas modificações
-let listWithModifiedName : Array<Object> = changeNameOrBio_Funcional(list, 1, 'name', 'Bob Esponja');
-console.log(listWithModifiedName);//Mostra a lista completa com o novo nome incluso
+//let listWithModifiedName : Array<Object> = changeNameOrBio_Funcional(list, 1, 'name', 'Bob Esponja');
+//console.log(listWithModifiedName);//Mostra a lista completa com o novo nome incluso
 
-let listWithModifiedBio : Array<Object> = changeNameOrBio_Funcional(list, 1, 'bio', 'É um cara que mora em um abacaxi');
-console.log(listWithModifiedBio);//Mostra a lista completa com a nova bio inclusa
+//let listWithModifiedBio : Array<Object> = changeNameOrBio_Funcional(list, 1, 'bio', 'É um cara que mora em um abacaxi');
+//console.log(listWithModifiedBio);//Mostra a lista completa com a nova bio inclusa
 
 let listWithDeletedItem : Array<Object> = deleteItem_Funcional(list, 4);
 console.log(listWithDeletedItem);//Mostra a lista com o elemento 2 deletado
 
 
 //Exemplos usando paradigma imperativo
-//deleteItem_Imperativo(1)
+//deleteItem_Imperativo(1);
 //changeNameOrBio_Imperativo(2, 'name', 'Chaves')
 //changeNameOrBio_Imperativo(2, 'bio', 'Mora em um barril.')
 
