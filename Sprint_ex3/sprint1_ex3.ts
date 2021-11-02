@@ -1,8 +1,8 @@
 
 let userList : Array<any>  = [60, 60, 60, 20, 20, 20]; // Maior = 60, Menor = 20, Média = 40
-let wrongUserList : Array<any>  = [60, 60, 'f', 20, true, 20]; // Lista híbrida, para dar exemplo de invalidação da lista
+const wrongUserList : Array<any>  = [60, 60, 'f', 20, true, 20]; // Lista híbrida, para dar exemplo de invalidação da lista
 
-function higherLowerAndAverage(recivedList : Array<any>, fuctionalProgramming : boolean = true) //Recebe a lista e o dado que define se o paradigma será funcional ou não
+function higherLowerAndAverage(recivedList : Array<any>, fuctionalProgramming : boolean = true)//Recebe a lista e o dado que define se o paradigma será funcional ou não
 {
   let validList : boolean = true; 
   for(let i = 0; i < recivedList.length; i++) //Etapa de validação, envia cada valor para a função "validateNumber" para checar se há algum elemento na lista que não seja um número.
@@ -32,12 +32,12 @@ function higherLowerAndAverage(recivedList : Array<any>, fuctionalProgramming : 
 
 }
 
-function validateNumber(numberForValidation: any) //Valida se a variável enviada é do tipo 'number'
+function validateNumber(numberForValidation: any) : boolean //Valida se a variável enviada é do tipo 'number'
 {
  return typeof(numberForValidation) == 'number' //Retorna se o valor passado é 'number' ou não
 }
 
-function higherValue(recivedList : Array<any>)//Recebe a lista atribui o maior valor encontrado à variavel "currentHigherNumber"
+function higherValue(recivedList : Array<any>) : number//Recebe a lista atribui o maior valor encontrado à variavel "currentHigherNumber"
 {
   let currentHigherNumber : number = recivedList[0]; //Começa recebendo o primeiro valor da lista para comparar com o restante
  
@@ -50,7 +50,7 @@ function higherValue(recivedList : Array<any>)//Recebe a lista atribui o maior v
   return currentHigherNumber; //Retorna o maior valor
 }
 
-function lowerValue(recivedList : Array<any>) //Mesmo processo da function anterior
+function lowerValue(recivedList : Array<any>) : number //Mesmo processo da function anterior
 {
   let currentLowerNumber : number = recivedList[0]; 
  
@@ -63,7 +63,7 @@ function lowerValue(recivedList : Array<any>) //Mesmo processo da function anter
   return currentLowerNumber;
 }
 
-function averageValue(recivedList : Array<any>)//Soma todos os valores da lista e divide pela quantidade de elementos presentes nela
+function averageValue(recivedList : Array<any>) : number//Soma todos os valores da lista e divide pela quantidade de elementos presentes nela
 {
   let currentSum : number = 0;
   let finalAverage : number = 0;
