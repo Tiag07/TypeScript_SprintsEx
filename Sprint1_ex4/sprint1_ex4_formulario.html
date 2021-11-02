@@ -15,21 +15,25 @@
          Nome <input type="text" name="inputNewName" id="inputNewName"><br>
          Biografia <input type="text" name="inputNewBio" id="inputNewBio">
     </div>
-    <input type="button" value="Adicionar na tabela" id = "btnAdicionarNaTabela" onclick=closeFormWindow()>
+    <input type="button" value="Adicionar na tabela" id = "btnAdicionarNaTabela" onclick=addItemOnTable()>
 
     <script>
-        function closeFormWindow(){ //Fecha a janela do formulário e recarrega a janela da tabela
+        function addItemOnTable(){ //Fecha a janela do formulário e recarrega a janela da tabela.
             
-            let peopleRegistredCount = localStorage.length/2;//Pega o id do último elemento salvo no localStorage, a divisão por 2 acontece devido cada objeto possuir 2 propriedades (name e bio).
-            
-            let newName = document.getElementById("inputNewName").value;//Pega os valores do formulário
-            let newBio = document.getElementById("inputNewBio").value;
+            let nameInput = document.getElementById("inputNewName");//Pega os valores do formulário.
+            let bioInput = document.getElementById("inputNewBio");
 
-            localStorage.setItem("name" + Number(peopleRegistredCount),newName);//Registra os valores digitados no slot seguinte ao slot do último dado armazenado
-            localStorage.setItem("bio" + Number(peopleRegistredCount), newBio);
-        
-           window.opener.location.href = "sprint1_ex4_tabela.html";//Recarrega a janela da tabela
-           window.self.close(); //Fecha a janela da tabela
+            let loadedList = JSON.parse(localStorage.getItem("peopleList") || "[]");//Carrega a lista armazenada.
+                       
+            let newPerson = {};//Cria um novo objeto com as informações do formulário.
+            newPerson.name = nameInput.value;
+            newPerson.bio = bioInput.value;
+            loadedList.push(newPerson); //Adiciona o novo objeto na lista carregada.
+            
+           localStorage.setItem("peopleList", JSON.stringify(loadedList));//Salva a lista carregada com o novo objeto adicionado.
+           window.opener.location.href = "sprint1_ex4_tabela.html";//Recarrega a janela da tabela.
+           nameInput.value = ''; bioInput.value = ''; //Limpa os inputs de texto.
+           
         }
     
     </script>

@@ -9,23 +9,17 @@ function onEnable_Table() {
     loadTableData();
 }
 function loadTableData() {
-    if (localStorage.getItem("name0") == null) { //Caso não exista um primeiro nome salvo, a tabela padrão (peopleList) é armazenada.
+    if (localStorage.getItem("peopleList") == null) { //Caso não exista uma lista já salva, a tabela padrão (peopleList) é salva.
         overwriteTableData(); //Salva os dados da tabela padrão.
         refreshTable(); //Atualiza a tabela da tela.
         return;
     }
-    peopleList = []; //Caso exista dados salvos, a tabela padrão é zerada para os dados salvos a substituirem.
-    for (var i = 0; i < localStorage.length / 2; i++) //Como os dados salvos são 2 para cada objeto (name e bio), a length/2 retorna o número de objetos completos salvos.
-     {
-        btnAddItemOnTable(localStorage.getItem('name' + i), localStorage.getItem('bio' + i)); //Os dados salvos são adicionados na lista, um de cada vez.
-    }
+    //Caso exista uma lista salva, ela é atribuida à peopleList para preencher os dados da tabela.
+    peopleList = JSON.parse(localStorage.getItem("peopleList") || "[]");
     refreshTable();
 }
 function overwriteTableData() {
-    for (var i = 0; i < peopleList.length; i++) {
-        localStorage.setItem("name" + i, peopleList[i].name); //o name + i serve para criar slots referentes para cada objeto na lista.
-        localStorage.setItem("bio" + i, peopleList[i].bio);
-    }
+    localStorage.setItem("peopleList", JSON.stringify(peopleList));
 }
 function openForm() {
     window.open('sprint1_ex4_formulario.html', 'rating', 'left =200, height=400, width=900');
@@ -34,22 +28,11 @@ function resetTable() {
     localStorage.clear();
     window.location.reload();
 }
-function btnAddItemOnTable(newName, newBio) {
-    if (newName === void 0) { newName = ''; }
-    if (newBio === void 0) { newBio = ''; }
-    var newPerson = {};
-    newPerson.id = 0;
-    newPerson.name = newName;
-    newPerson.bio = newBio;
-    peopleList.push(newPerson);
-    overwriteTableData(); //Salvar as alterações    
-}
 function deleteItem() {
     var idForDeleting = Number(window.prompt('Qual o Id do item que você quer deletar?')); //Recebe o id que o usuário deseja deletar.
     if (ValidateId(idForDeleting)) //Valida se o id representa algum elemento da lista.
      {
         peopleList.splice(idForDeleting - 1, 1); //Como a tabela mostra o primeiro elemento com Id 1, então essa subtração é necessária.
-        localStorage.clear();
         overwriteTableData();
         refreshTable();
     }
