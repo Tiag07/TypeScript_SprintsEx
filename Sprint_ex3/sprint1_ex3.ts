@@ -7,13 +7,13 @@ function higherLowerAndAverage(recivedList : Array<any>, fuctionalProgramming : 
   let validList : boolean = true; 
   for(let i = 0; i < recivedList.length; i++) //Etapa de validação, envia cada valor para a função "validateNumber" para checar se há algum elemento na lista que não seja um número.
   {
-      if(validateNumber(recivedList[i]) == false)//Caso haja, imprime no console todos os valores que são inválidos e define a lista como inválida.
+      if(validateNumber(recivedList[i]) === false)//Caso haja, imprime no console todos os valores que são inválidos e define a lista como inválida.
       {
         console.log(`${recivedList[i]} não é um número valido.`);
         validList = false;
       }
   }
-  if(validList == false) return "Insira apenas números validos na lista."; //Se a lista for inválida, encerra o processo por aqui. 
+  if(validList === false) return "Insira apenas números validos na lista."; //Se a lista for inválida, encerra o processo por aqui. 
 
      let newList : Array<number> = []; //Cria uma nova lista para receber os 3 valores requisitados
      newList.push(higherValue(recivedList));//Adiciona o maior valor
@@ -34,7 +34,7 @@ function higherLowerAndAverage(recivedList : Array<any>, fuctionalProgramming : 
 
 function validateNumber(numberForValidation: any) : boolean //Valida se a variável enviada é do tipo 'number'
 {
- return typeof(numberForValidation) == 'number' //Retorna se o valor passado é 'number' ou não
+ return typeof(numberForValidation) === 'number' //Retorna se o valor passado é 'number' ou não
 }
 
 function higherValue(recivedList : Array<any>) : number//Recebe a lista atribui o maior valor encontrado à variavel "currentHigherNumber"
@@ -77,8 +77,13 @@ function averageValue(recivedList : Array<any>) : number//Soma todos os valores 
 }
 
 //Exemplos de funcionamento
+console.log(`Lista: [${wrongUserList}] enviada. Resultados:`)
 console.log(higherLowerAndAverage(wrongUserList,true));//Enviando uma lista híbrida
-console.log(higherLowerAndAverage(userList,true));//Enviando uma lista apenas com números (Paradigma funcional)
-console.log(userList);//A lista original se mantém
-console.log(higherLowerAndAverage(userList,false));//Enviando uma lista apenas com números (Paradigma imperativo)
-console.log(userList);//A lista original é modificada
+
+console.log(`Lista: [${userList}] enviada com paradigma funcional. Resultados:`)
+console.log("Maior, menor e média: " + higherLowerAndAverage(userList,true));//Enviando uma lista apenas com números (Paradigma funcional)
+console.log("Lista original: " + userList);//A lista original se mantém
+
+console.log(`Lista: [${userList}] enviada com paradigma imperativo. Resultados:`)
+console.log("Maior, menor e média: " + higherLowerAndAverage(userList,false));//Enviando uma lista apenas com números (Paradigma imperativo)
+console.log("Lista original: " + userList);//A lista original é modificada
